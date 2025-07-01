@@ -1,155 +1,61 @@
-# 🛒 SaaS Grocery Platform
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## Overview
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-This project is a multi-tenant SaaS platform where independent grocery vendors can create and manage **their own branded online grocery stores**, complete with:
-- Custom domains
-- Admin dashboards
-- Product management
-- Order tracking
-- Integrated payment gateways
+## About Laravel
 
-All of this is powered by a **central backend**, similar to platforms like **Wix, Shopify, or AWS SaaS** — vendors get autonomy, while we maintain control of the underlying infrastructure.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
----
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## 🌐 Target Use Case
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-- **Admin (Platform Owner)** creates the base SaaS infrastructure.
-- **Vendors** sign up to create **their own stores**, which have:
-  - Their own domains (e.g. `freshmart.store`, `gogrocery.io`)
-  - Separate login for vendor store admins
-  - Their own payment gateways (Stripe, Razorpay, etc.)
-  - A customizable frontend UI for customers
-- **Customers** browse and shop on these vendor sites like a standard e-commerce site.
+## Learning Laravel
 
----
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## 🏗️ Architecture Overview
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-### 1. **Backend Stack**
-- **Laravel 10**: Main framework
-- **Stancl/Tenancy**: For multi-tenancy with DB or subdomain/domain separation
-- **MySQL / MariaDB**: Primary relational DB
-- **Laravel Cashier**: For vendor subscriptions and billing
-- **Stripe Integration**: For vendor-specific payments
-- **Queue (Redis/Database)**: For background jobs
-- **Laravel Breeze or Jetstream**: For authentication scaffolding
-                      ![image](https://github.com/user-attachments/assets/85c373be-0016-47a2-a160-0d19ba3c7d6b)
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
+## Laravel Sponsors
 
-### 2. **Frontend Options**
-- Blade + Tailwind (default Laravel)
-- OR Vue/React for advanced SPA stores
-- Each tenant can have theme/customization options
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### 3. **Deployment**
-- Docker (optional)
-- Nginx + PHP-FPM or Laravel Forge/Vapor
-- Multi-domain SSL support via Let's Encrypt or Cloudflare
-- GitHub CI/CD actions for automated deployments
+### Premium Partners
 
----
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
 
-## 🧱 Core Modules
+## Contributing
 
-| Module              | Description                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
-| **Vendor Onboarding** | Tenant registration, domain mapping, DB provisioning                     |
-| **Tenant Admin Panel** | Product, inventory, orders, settings, shipping, payments                  |
-| **Customer Storefront** | Public-facing store with products, cart, checkout                         |
-| **Payments**          | Individual payment gateway integration per vendor (Stripe, Razorpay, etc) |
-| **Subscriptions**     | Platform usage subscription (monthly, yearly) via Stripe Cashier           |
-| **Custom Domains**    | Vendor can map custom domain to their store                                |
-| **Analytics**         | Basic insights: orders, sales, product views per vendor                    |
-| **Email/Notifications** | Transactional and admin communications                                  |
-| **Themes**            | Vendors can choose from pre-built themes (optional feature)                |
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
----
+## Code of Conduct
 
-## 📝 Step-by-Step Development Plan
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### 🔹 Phase 1: Planning & Setup
-1. Define feature set & user roles
-2. Choose Laravel + tenancy + billing strategy
-3. Set up GitHub repo, CI/CD (GitHub Actions, Forge, etc.)
+## Security Vulnerabilities
 
-### 🔹 Phase 2: SaaS Core Setup
-1. Install Laravel
-2. Configure `stancl/tenancy`
-3. Scaffold tenant routes and DB separation
-4. Create base admin panel for superadmin
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-### 🔹 Phase 3: Vendor Onboarding Flow
-1. Vendor registration page
-2. Automated tenant DB + subdomain + Stripe subscription creation
-3. Vendor welcome dashboard
+## License
 
-### 🔹 Phase 4: Tenant Features
-1. CRUD: Products, Categories, Orders, Customers
-2. Store settings: Store name, logo, policies
-3. Custom payment gateway integration
-4. File/image uploads
-
-### 🔹 Phase 5: Customer Storefront
-1. Product listing, cart, checkout
-2. Responsive UI for customer-facing pages
-3. Guest/registered checkout
-4. Order confirmation & email flow
-
-### 🔹 Phase 6: Advanced Features
-1. Domain mapping (DNS + SSL)
-2. Vendor theme selector/customizer
-3. Admin dashboard: stats per store
-4. Store analytics and reporting
-5. Notification center
-
-### 🔹 Phase 7: Finalize & Deploy
-1. Harden security
-2. Run full tests
-3. Dockerize / deploy on VPS or Forge
-4. CI/CD setup with GitHub Actions
-
----
-
-## 🧑‍💻 User Roles
-
-| Role         | Capabilities                                                                 |
-|--------------|-------------------------------------------------------------------------------|
-| **Super Admin** | Manages the SaaS platform, pricing, users, and global settings              |
-| **Vendor Admin** | Manages a single store: products, orders, users, domains, payments         |
-| **Customer**     | Shops on the vendor's site, places orders, manages their own account       |
-
----
-
-## 🚀 Future Enhancements
-
-- AI-based product recommendations
-- WhatsApp order updates
-- Vendor mobile app
-- Affiliate program for vendors
-- Multi-language and currency support
-- POS integration
-
----
-
-## 🛠️ Tech Stack Summary
-
-| Tech        | Purpose                                  |
-|-------------|------------------------------------------|
-| Laravel     | Core framework                           |
-| Stancl/Tenancy | Multi-tenancy separation                |
-| MySQL       | Data storage                             |
-| Stripe      | Payments + subscriptions                 |
-| TailwindCSS | Styling                                  |
-| Vue/React   | Optional for frontend                     |
-| Docker      | Local & production deployment            |
-
----
-
-## 📚 Useful References
-
-- [Stancl Tenancy Docs](https://tenancyforlaravel.com/docs)
-- [Laravel Cashier (Stripe)](https://laravel.com/docs/10.x/billing)
-- [Laravel Docs](https://laravel.com/docs)
-- [GitHub Actions Docs](https://docs.github.com/en/actions)
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

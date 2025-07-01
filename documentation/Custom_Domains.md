@@ -6,12 +6,20 @@ The Custom Domains module allows vendors to map their own domain name to their o
 
 ## Features
 
-- **Domain Mapping Interface:** A user-friendly interface within the Tenant Admin Panel for vendors to add and manage their custom domains.
-- **DNS Verification:** Tools and instructions for vendors to verify domain ownership through DNS records (e.g., CNAME, A records).
-- **SSL Certificate Provisioning:** Automatic or guided setup of SSL certificates for the custom domain to ensure secure connections (HTTPS).
-- **Domain Status Tracking:** Displaying the current status of the custom domain (e.g., verifying, active, inactive).
-- **Error Handling:** Providing clear feedback and troubleshooting guidance if domain mapping fails.
+- **DNS Instructions for Vendors:** Clear, step-by-step instructions provided to vendors on how to point their domain's DNS records (e.g., CNAME or A records) to the platform's servers.
+- **DNS Validation:** Functionality to automatically check and validate that the vendor's DNS records have been correctly configured and propagated.
+- **Domain Association with Tenant:** Securely linking the custom domain to the specific vendor's tenant account in the platform's global database.
+- **SSL Certificate Provisioning:** Automated provisioning of free SSL certificates (likely using Let's Encrypt) for each custom domain to enable HTTPS.
+- **SSL Renewal:** Automated renewal of SSL certificates before they expire to ensure continuous secure access.
+- **Switching to Subdomain:** An option for vendors to easily revert back to using their default subdomain if they choose to.
+- **Handling Conflicts/Errors:** Robust error handling and clear reporting to vendors if there are issues with domain configuration, validation, or SSL provisioning.
 
 ## Implementation Details
 
-The implementation of the Custom Domains module will involve configuring the web server (e.g., Nginx) to handle incoming requests for vendor-specific domains and route them to the correct tenant's application instance. This will likely involve dynamic configuration based on the domain provided in the request header. The DNS verification process will require generating unique verification codes for each vendor and providing instructions on how to add them to their domain's DNS records. SSL certificate provisioning can be integrated with services like Let's Encrypt for automated certificate issuance and renewal. The application logic will need to store and manage the mapping between vendor tenants and their custom domains, as well as track the status of the domain configuration. This will involve database schemas to store domain information and associated tenant IDs.
+The implementation will involve several key technical components:
+- **Laravel Routing:** Using Laravel's routing capabilities to identify the requested domain and resolve it to the correct tenant's context using the `stancl/tenancy` package.
+- **DNS Validation Methods:** Implementing methods to programmatically check DNS records. This could involve using external DNS lookup libraries or interacting with DNS provider APIs if available.
+- **SSL Provisioning Service/Library:** Integrating with a service like Certbot or a cloud provider's SSL management system for automated SSL certificate issuance, validation (e.g., using HTTP-01 or DNS-01 challenges), and renewal.
+- **Storing Domain/SSL Info Globally:** Storing custom domain names, validation status, SSL certificate status, and expiration dates in the global database, linked to the `tenants` table.
+- **Web Server Configuration (Nginx):** Configuring the web server (Nginx) to dynamically handle requests for different domains and serve the correct application instance, potentially using server block configurations generated or managed by the application or a deployment tool.
+- **Handling Misconfigurations:** Implementing error pages and logging for cases where a custom domain is pointed incorrectly, SSL is invalid, or other configuration issues occur.

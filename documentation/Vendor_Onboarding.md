@@ -7,17 +7,22 @@ The Vendor Onboarding module is responsible for the process of bringing new groc
 ## Features
 
 - **Vendor Registration:** Allows new vendors to sign up for the platform, providing necessary business information.
-- **Tenant Provisioning:** Automatically sets up the necessary infrastructure for a new vendor's store, including database and file storage.
-- **Domain/Subdomain Configuration:** Manages the assignment of a subdomain (e.g., `vendorname.yourplatform.com`) or the process for the vendor to map a custom domain to their store.
-- **Initial Store Setup:** Guides the vendor through initial configuration steps for their store, such as setting the store name, logo, and basic contact information.
-- **Subscription Management Integration:** Initiates the process of setting up the vendor's subscription plan and integrating with the payment gateway (e.g., Stripe Cashier).
+- **User Registration Form:** A web form for vendors to input their details and create an account.
+- **Validation:** Server-side validation of submitted vendor information to ensure data integrity and security.
+- **Tenant Record Creation:** Creation of a new record in the global `tenants` table to represent the new vendor's store.
+- **Tenant Database Provisioning:** Automated setup of a dedicated database for the new tenant (if using database per tenant) or configuration within a shared database.
+- **Domain Mapping:** Configuration of a subdomain (e.g., `vendorname.yourplatform.com`) or the process for the vendor to map a custom domain to their store.
+- **Subscription Integration:** Integration with the subscription management module (using Laravel Cashier) to select and initiate a subscription plan for the new vendor.
+- **Welcome Emails:** Sending automated welcome emails and onboarding instructions to the newly registered vendor.
 
 ## Implementation Details
 
 The Vendor Onboarding process will primarily involve a series of web forms for vendor registration and configuration. Upon successful registration and potentially payment confirmation, backend processes will be triggered to:
 
 - Create a new tenant record in the central database.
-- Provision a new database for the tenant (if using database per tenant) or create necessary schema/identifiers (if using shared database).
+- Using **Laravel's authentication scaffolding** for handling user registration and login.
+- Leveraging the **`stancl/tenancy`** package for creating new tenant records and managing tenant-specific databases or schema separation.
+- Utilizing **Laravel's database migration capabilities** to set up the necessary tables and schema within the new tenant's database.
 - Configure DNS records for the vendor's subdomain.
 - Set up initial configurations in the tenant's environment.
 - Interact with the subscription management system (Stripe Cashier) to create a new customer and subscription.
